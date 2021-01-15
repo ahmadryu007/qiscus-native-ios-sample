@@ -12,7 +12,7 @@ import Foundation
 import UserNotifications
 import SwiftyJSON
 
-let APP_ID : String = "sdksample"
+let APP_ID : String = "kawan-seh-g857ffuuw9b"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
