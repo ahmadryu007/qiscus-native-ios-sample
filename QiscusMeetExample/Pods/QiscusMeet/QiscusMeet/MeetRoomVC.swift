@@ -13,6 +13,7 @@ class MeetRoomVC: UIViewController, JitsiMeetViewDelegate {
     var pipViewCoordinator: PiPViewCoordinator?
     var jitsiMeetView: JitsiMeetView?
     var baseUrlCall: String = ""
+    var isMicMuted: Bool = false
     var isVideo: Bool = true
     init() {
         super.init(nibName: "MeetRoomVC", bundle: QiscusMeet.bundle)
@@ -38,11 +39,14 @@ class MeetRoomVC: UIViewController, JitsiMeetViewDelegate {
             let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
                 builder.welcomePageEnabled = false
                 builder.room  = self.baseUrlCall
+                builder.audioMuted = !self.isMicMuted
+                builder.setFeatureFlag("requirepassword.enabled", withBoolean: QiscusMeetConfig.shared.setPassword)
+                builder.setFeatureFlag("videoThumbnail.enabled", withBoolean: QiscusMeetConfig.shared.setVideoThumbnailsOn)
+                builder.setFeatureFlag("chat.enabled", withBoolean: QiscusMeetConfig.shared.setChat)
+                builder.setFeatureFlag("overflowMenu.enabled", withBoolean: QiscusMeetConfig.shared.setOverflowMenu)
+                builder.setFeatureFlag("meeting-name.enabled", withValue: QiscusMeetConfig.shared.setEnableRoomName)
               
-                if self.isVideo{
-                    builder.audioMuted = false
-                    builder.videoMuted = false
-                }else{
+                if !self.isVideo{
                     builder.videoMuted = true
                     builder.audioOnly = true
                 }
@@ -88,7 +92,9 @@ class MeetRoomVC: UIViewController, JitsiMeetViewDelegate {
     
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {
-
+        if let delegate = QiscusMeet.shared.QiscusMeetDelegate{
+            delegate.conferenceJoined()
+        }
     }
 
     func enterPicture(inPicture data: [AnyHashable : Any]!) {

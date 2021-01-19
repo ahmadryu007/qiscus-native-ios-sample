@@ -1,5 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-QiscusMeetExample/Pods-QiscusMeetExample-frameworks.sh
-${PODS_ROOT}/../../SDK/JitsiMeet.framework
-${PODS_ROOT}/../../SDK/WebRTC.framework
+${PODS_ROOT}/QiscusMeet/SDK/JitsiMeet.framework
+${PODS_ROOT}/QiscusMeet/SDK/WebRTC.framework
 ${BUILT_PRODUCTS_DIR}/QiscusMeet/QiscusMeet.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

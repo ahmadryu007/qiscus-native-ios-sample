@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     }
     
     func call(isVideo: Bool, roomName : String){
-        _ = QiscusMeet.call(isVideo: isVideo, room: roomName, avatarUrl: "https://filmschoolrejects.com/wp-content/uploads/2017/04/0JRofTsuy93evl_J5.jpg", displayName: "arief", onSuccess: { (vc) in
+        _ = QiscusMeet.call(isVideo: isVideo, isMicMuted: false, room: roomName, avatarUrl: "https://filmschoolrejects.com/wp-content/uploads/2017/04/0JRofTsuy93evl_J5.jpg", displayName: "arief", onSuccess: { (vc) in
             self.viewVC = vc
             vc.modalPresentationStyle = .fullScreen
             self.navigationController?.present(vc, animated: true, completion: {
@@ -95,6 +95,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController : QiscusMeetDelegate{
+    
+    func conferenceJoined() {
+        print("conferenceJoined")
+    }
+    
     func conferenceTerminated() {
         self.navigationController?.dismiss(animated: true, completion: {
             //actionSend comment endCall
